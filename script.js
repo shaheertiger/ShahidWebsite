@@ -34,16 +34,6 @@ document.querySelectorAll('.service-card, .why-card, .step, .testimonial-card, .
   observer.observe(el);
 });
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const service = document.getElementById('service').value;
-  const message = document.getElementById('message').value;
-  const waText = encodeURIComponent(`Hi, I'm ${name} and I'm interested in ${service || 'insurance'}. ${message}`);
-  window.open(`https://wa.me/14167162915?text=${waText}`, '_blank');
-});
-
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
