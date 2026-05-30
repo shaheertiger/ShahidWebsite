@@ -779,8 +779,15 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/Shahid.ssa01@gmail.com" method="POST">
           <h3>Send Us a Message</h3>
+          <!-- FormSubmit configuration -->
+          <input type="hidden" name="_subject" value="New quote request from 1StopCoverage.ca" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://1stopcoverage.ca/?sent=1" />
+          <!-- Honeypot anti-spam field (kept empty by real users) -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name</label>
