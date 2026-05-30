@@ -1,4 +1,75 @@
+# 1StopCoverage.ca — robots.txt
+# Allow all traditional search engines + AI / LLM crawlers
+
 User-agent: *
+Allow: /
+
+# ===== AI / LLM Engines (explicitly welcomed) =====
+
+# OpenAI (ChatGPT / SearchGPT)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Google (Gemini / AI Overviews)
+User-agent: Google-Extended
+Allow: /
+User-agent: Googlebot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft (Bing / Copilot)
+User-agent: bingbot
+Allow: /
+User-agent: msnbot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+User-agent: FacebookBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (training data many models use)
+User-agent: CCBot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckAssistBot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://1stopcoverage.ca/sitemap.xml
