@@ -68,15 +68,19 @@ document.querySelectorAll('.service-card, .why-card, .step, .testimonial-card, .
   observer.observe(el);
 });
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const service = document.getElementById('service').value;
-  const message = document.getElementById('message').value;
-  const waText = encodeURIComponent(`Hi, I'm ${name} and I'm interested in ${service || 'insurance'}. ${message}`);
-  window.open(`https://wa.me/14167162915?text=${waText}`, '_blank');
-});
+// Confirmation after FormSubmit redirect (?sent=1)
+if (new URLSearchParams(location.search).get('sent') === '1') {
+  const form = document.getElementById('contactForm');
+  if (form) {
+    const note = document.createElement('p');
+    note.className = 'form-success';
+    note.setAttribute('role', 'status');
+    note.textContent = '✓ Thanks! Your message has been sent — we\'ll get back to you shortly.';
+    form.prepend(note);
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  history.replaceState(null, '', location.pathname);
+}
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
