@@ -147,8 +147,9 @@ ul { list-style: none; }
   transition: all var(--transition);
 }
 .navbar.scrolled {
-  background: rgba(255,255,255,.95);
-  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 24px rgba(0,0,0,.08);
   padding: 12px 0;
 }
@@ -330,7 +331,8 @@ ul { list-style: none; }
 
 .hero-card {
   background: rgba(255,255,255,.1);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,.2);
   border-radius: var(--radius);
   padding: 24px;
@@ -418,6 +420,10 @@ ul { list-style: none; }
   gap: 16px;
   width: max-content;
   animation: slide 25s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logos-slide { animation: none; }
 }
 .logo-chip {
   background: var(--white);
