@@ -1,8 +1,42 @@
-// Navbar scroll effect
+// Navbar scroll effect + active nav highlighting (single throttled handler)
 const navbar = document.getElementById('navbar');
+const sections = [...document.querySelectorAll('section[id]')];
+const navItems = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+
+// Cache section offsets so we don't force layout on every scroll frame.
+let sectionTops = [];
+function measureSections() {
+  sectionTops = sections.map(s => ({ id: s.id, top: s.offsetTop - 120 }));
+}
+measureSections();
+window.addEventListener('resize', measureSections, { passive: true });
+window.addEventListener('load', measureSections);
+
+let activeId = '';
+let scrollTicking = false;
+function onScroll() {
+  scrollTicking = false;
+  const y = window.scrollY;
+  navbar.classList.toggle('scrolled', y > 40);
+
+  let current = '';
+  for (const s of sectionTops) {
+    if (y >= s.top) current = s.id;
+  }
+  if (current !== activeId) {
+    activeId = current;
+    navItems.forEach(a => {
+      a.style.fontWeight = a.getAttribute('href') === `#${current}` ? '700' : '';
+    });
+  }
+}
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+  if (!scrollTicking) {
+    scrollTicking = true;
+    requestAnimationFrame(onScroll);
+  }
+}, { passive: true });
+onScroll();
 
 // Mobile menu
 const hamburger = document.getElementById('hamburger');
@@ -34,6 +68,20 @@ document.querySelectorAll('.service-card, .why-card, .step, .testimonial-card, .
   observer.observe(el);
 });
 
+// Confirmation after FormSubmit redirect (?sent=1)
+if (new URLSearchParams(location.search).get('sent') === '1') {
+  const form = document.getElementById('contactForm');
+  if (form) {
+    const note = document.createElement('p');
+    note.className = 'form-success';
+    note.setAttribute('role', 'status');
+    note.textContent = '✓ Thanks! Your message has been sent — we\'ll get back to you shortly.';
+    form.prepend(note);
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  history.replaceState(null, '', location.pathname);
+}
+
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -44,16 +92,3 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     btn.setAttribute('aria-expanded', !isOpen);
   });
 });
-
-// Smooth active nav highlighting
-const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
-  });
-  navItems.forEach(a => {
-    a.style.fontWeight = a.getAttribute('href') === `#${current}` ? '700' : '';
-  });
-}, { passive: true });
